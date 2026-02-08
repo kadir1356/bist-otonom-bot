@@ -1,23 +1,8 @@
-# Sentinel-BIST - Hybrid Algorithmic Trading Bot
-# Python 3.10+
-
-# Data & Technical Analysis
-pandas>=2.0.0
-pandas-ta>=0.3.14b
-yfinance>=0.2.36
-
-# News Scraping
-beautifulsoup4>=4.12.0
-feedparser>=6.0.10
-requests>=2.31.0
-
-# Turkish Sentiment Analysis (choose one or both)
-transformers>=4.36.0
-torch>=2.1.0
-# nltk>=3.8.1  # Alternative: lighter weight
-
-# Security & Config
-python-dotenv>=1.0.0
-
-# Cloud-Ready: Dashboard & Notifications
-streamlit>=1.28.0
+streamlit
+yfinance
+pandas
+pandas_ta
+requests
+python-dotenv
+beautifulsoup4
+feedparser
