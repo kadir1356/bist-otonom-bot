@@ -13,23 +13,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Buildozer Dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y build-essential libffi-dev python3-dev python3-pip libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libsqlite3-dev tk-dev libgdbm-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev unzip zip openjdk-17-jdk
-          pip3 install --user buildozer cython==0.29.33
-
       - name: Build with Buildozer
         run: |
+          sudo apt update
+          sudo apt install -y build-essential libffi-dev python3-dev python3-pip libssl-dev zlib1g-dev unzip zip openjdk-17-jdk
+          pip3 install --user buildozer cython==0.29.33
           export PATH=$PATH:$HOME/.local/bin
-          # Lisansları otomatik onaylama
-          yes | buildozer android debug || true
-          
-          # Eğer üstteki hata verirse manuel lisans onayı
-          mkdir -p ~/.android && touch ~/.android/repositories.cfg
-          yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses || true
-          
-          buildozer android debug
+          # Log seviyesini 2 yaparak hatayı yakalıyoruz
+          yes | buildozer android debug log_level=2
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
