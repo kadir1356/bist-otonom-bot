@@ -9,7 +9,7 @@ package.domain = com.sentinelbist
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
-requirements = python3,kivy,numpy,pandas,yfinance,requests
+requirements = python3,kivy,requests
 orientation = portrait
 fullscreen = 0
 
@@ -29,3 +29,4 @@ android.accept_sdk_license = True
 p4a.branch = master
 p4a.bootstrap = sdl2
 android.archs = arm64-v8a, armeabi-v7a
+
