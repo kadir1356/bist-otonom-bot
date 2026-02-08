@@ -13,17 +13,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Buildozer
+      - name: Install Dependencies
         run: |
           sudo apt update
           sudo apt install -y build-essential libffi-dev python3-dev python3-pip libssl-dev zlib1g-dev unzip zip openjdk-17-jdk
           pip3 install --user buildozer cython==0.29.33
+
+      - name: Build with Buildozer
+        run: |
           export PATH=$PATH:$HOME/.local/bin
-          # Log seviyesini 2 yaparak hatayı yakalıyoruz
-          yes | buildozer android debug log_level=2
+          # Lisansları tek tek onaylamak yerine Android SDK'ya önceden kabul ettiriyoruz
+          mkdir -p ~/.android && touch ~/.android/repositories.cfg
+          # Buildozer'ı 'yes' komutu olmadan, hata kontrolüyle çalıştır
+          buildozer android debug || (buildozer android debug log_level=2)
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: sentinel-bist-final
+          name: Rose-Bist-Bot-Final
           path: bin/*.apk
